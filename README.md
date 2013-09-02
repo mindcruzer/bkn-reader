@@ -1,13 +1,11 @@
 ### Batch Kinetics File Reader
 
-This is a small application that pulls data out of .BKN files produced by Varian Cary WinUV 
-software and serializes it as JSON.
+This is a small application I made back in the day that pulls data out of .bkn files produced by 
+Varian Cary WinUV software, and serializes it to JSON.
 
 Why? I'm not really sure. I was bored I guess.  
 
-It's kind of... ahem... messy, because I don't code in C very often, and I threw it together in 
-about 5 hours. But, it works, so that's something.
-
+It's kind of... ahem... messy, but, it works, so that's something.
 
 #### Prereqs
 
