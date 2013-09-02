@@ -1,0 +1,236 @@
+Ca,,Fe,,Ca,,Fe,,Ca,,Fe,,
+Time (min),Abs,Time (min),Abs,Time (min),Abs,Time (min),Abs,Time (min),Abs,Time (min),Abs,
+0.0008333334117,1.700825572,0.05916666985,1.409811616,0.09250000119,1.233763695,0.1275000125,0.959808588,0.1608333439,1.289485693,0.1941666752,0.7424465418,
+0.3041666746,1.647783637,0.3474999964,1.413982749,0.3825000226,1.231594324,0.415833354,0.9589388371,0.4491666853,0.02072462812,0.4825000167,0.1162846014,
+0.592500031,0.0962170437,0.6358333826,0.756152153,0.6691666842,-0.1113005206,0.7041667104,0.08680529892,0.7375000715,-0.1325202435,0.7725000381,0.2265891582,
+0.8825000525,2.076076269,0.924166739,2.091600895,0.9591667056,1.996255398,0.9941666722,1.677177548,1.027500033,0.868447125,1.060833335,-0.06362534314,
+1.170833349,-0.08137034625,1.21416676,-0.06928917766,1.247500062,-0.05688168481,1.280833483,-0.07165140659,1.315833449,-0.1635955572,1.349166751,0.05884915963,
+1.460833311,1.90446353,1.502500057,1.948392391,1.535833359,1.883324981,1.570833445,1.931761742,1.604166746,1.888302803,1.637500167,1.864030361,
+1.747500062,1.869436502,1.792500019,1.945648432,1.82583344,1.86334455,1.859166741,1.89178431,1.892500043,1.868767977,1.927500129,1.840122819,
+2.037500143,1.847356915,2.080833435,1.924432039,2.114166737,1.848672867,2.147500038,1.88191545,2.18083334,1.845415711,2.215833426,1.826925397,
+2.325833321,1.81828928,2.367500067,1.905222654,2.400833368,1.832138896,2.4375,1.8502388,2.47083354,1.806088448,2.504166842,1.775369883,
+2.614166737,1.796946287,2.655833483,1.863323689,2.690833569,1.811130643,2.725833416,1.821825147,2.759166718,1.779968023,2.792500019,1.729164362,
+2.902500153,1.767729759,2.944166899,1.829535246,2.979166985,1.790303946,3.012500286,1.802811742,3.045833588,1.749243379,3.080833435,1.702622652,
+3.190833569,1.734047055,3.234166622,1.805025458,3.267500162,1.761198282,3.302500248,1.752682209,3.335833549,1.727095246,3.369166851,1.6727494,
+3.479166985,1.696669459,3.522500038,1.770059347,3.55583334,1.728207469,3.590833426,1.716176391,3.624166965,1.705548286,3.657500267,1.651266456,
+3.769166708,1.665964842,3.810833454,1.741546869,3.844166756,1.699706197,3.879166842,1.679245353,3.912500143,1.686800361,3.945833683,1.641950488,
+4.057500362,1.654210091,4.09916687,1.703963995,4.134167194,1.664674997,4.167500496,1.674602389,4.200833797,1.669449806,4.235833645,1.640510917,
+4.345833302,1.649772286,4.389166832,1.670744777,4.422500134,1.647748351,4.455833435,1.664770484,4.490833759,1.652590632,4.524167061,1.638823509,
+4.634167194,1.645007014,4.677500248,1.662372947,4.710833549,1.64348805,4.744166851,1.660409927,4.777500629,1.640769005,4.8125,1.635858774,
+4.922500134,1.642547727,4.964166641,1.655943394,4.999166965,1.637947559,5.032500267,1.658023119,5.065833569,1.633900762,5.102500439,1.636739135,
+5.210833549,1.640088558,5.25416708,1.650764942,5.287500381,1.631049752,5.320833683,1.657236099,5.35583353,1.630125523,5.390833378,1.636692047,
+5.499166965,1.641109824,5.542500496,1.649032474,5.575833797,1.627411962,5.609167099,1.654354453,5.644166946,1.629737854,5.679167271,1.636410952,
+5.787500381,0.1428554952,5.832499981,0.298874706,5.865833759,-0.09589733183,5.899167061,0.02483425848,5.932500362,0.4012142718,5.96750021,0.03920550644,
+6.075833797,-0.02930323035,6.119166851,1.677746654,6.152500629,1.640313864,6.187500477,1.673617959,6.220833778,1.661242366,6.25416708,1.682344913,
+6.365833759,1.654990315,6.407500267,1.672929406,6.440833569,1.63538444,6.475833416,1.667707443,6.509167194,1.655929685,6.544167042,1.676579595,
+6.652500629,1.652561665,6.697500229,1.671864867,6.73083353,1.634133935,6.764166832,1.661911368,6.799166679,1.651161551,6.832499981,1.671793818,
+6.942500114,1.650051236,6.984167099,1.670519114,7.019166946,1.632211089,7.052500248,1.657157779,7.087500572,1.649481535,7.120833874,1.670536876,
+7.230834007,1.647321224,7.274167061,1.665846467,7.307500362,1.629676938,7.34250021,1.65194571,7.375833511,1.647192001,7.409166813,1.665841818,
+7.519166946,1.647683024,7.562500477,1.662683368,7.595833778,1.626183391,7.630834103,1.647384763,7.664167404,1.644209266,7.699166775,1.662549019,
+7.807500362,1.644536734,7.852500439,1.659607768,7.88583374,1.624056101,7.919167042,1.64299047,7.954167366,1.641993642,7.989167213,1.656334877,
+8.097500801,1.644878268,8.140833855,1.657994628,,,,,,,,,
+
+Ca,
+Ca
+Collection Time: 7/17/2012 4:48:57 PM
+Operator Name  :
+Kinetics Software Version: 4.20(468)
+Parameter List :
+Instrument                        Cary 300
+Instrument version                12.00
+Wavelength (nm)                   340.00
+Ordinate mode                     Abs
+SBW (nm)                          1.0
+Ave Time (sec)                    0.100
+Dwell Time(sec)                   0.00
+Cycle Time(min)                   0.00
+Stop Time(min)                    15.00
+Comments
+Method Log     :
+Method Name    :
+Date/Time stamp: 7/17/2012 3:58:18 PM
+Method Modifications:
+Read WL Str Changed: 7/17/2012 3:58:39 PM, Old:500.00, New:340.00
+Read WL1 Changed: 7/17/2012 3:58:39 PM, Old: 500.00, New: 340.00
+Stop Time 1 Changed: 7/17/2012 3:58:39 PM, Old:     1.00, New:    10.00
+Cell Changer Changed: 7/17/2012 3:58:39 PM, Old:OFF, New:ON
+Auto Temp Setting Changed: 7/17/2012 3:58:39 PM, Old:0, New:1
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_50uM.BKNCalc Start 1 Changed: 7/17/2012 4:20:34 PM, Old:     0.00, New:     6.20
+Calc Stop 1 Changed: 7/17/2012 4:20:34 PM, Old:    10.00, New:     7.20
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_25uM.BKNCalc Start 1 Changed: 7/17/2012 4:31:58 PM, Old:     6.20, New:     7.00
+Calc Stop 1 Changed: 7/17/2012 4:31:58 PM, Old:     7.20, New:     8.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_12uM.BKNCalc Start 1 Changed: 7/17/2012 4:45:51 PM, Old:     7.00, New:     6.00
+Calc Stop 1 Changed: 7/17/2012 4:45:51 PM, Old:     8.00, New:     7.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_6uM.BKN
+End Method Modifications
+
+Fe,
+Fe
+Collection Time: 7/17/2012 4:48:57 PM
+Operator Name  :
+Kinetics Software Version: 4.20(468)
+Parameter List :
+Instrument                        Cary 300
+Instrument version                12.00
+Wavelength (nm)                   340.00
+Ordinate mode                     Abs
+SBW (nm)                          1.0
+Ave Time (sec)                    0.100
+Dwell Time(sec)                   0.00
+Cycle Time(min)                   0.00
+Stop Time(min)                    15.00
+Comments
+Method Log     :
+Method Name    :
+Date/Time stamp: 7/17/2012 3:58:18 PM
+Method Modifications:
+Read WL Str Changed: 7/17/2012 3:58:39 PM, Old:500.00, New:340.00
+Read WL1 Changed: 7/17/2012 3:58:39 PM, Old: 500.00, New: 340.00
+Stop Time 1 Changed: 7/17/2012 3:58:39 PM, Old:     1.00, New:    10.00
+Cell Changer Changed: 7/17/2012 3:58:39 PM, Old:OFF, New:ON
+Auto Temp Setting Changed: 7/17/2012 3:58:39 PM, Old:0, New:1
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_50uM.BKNCalc Start 1 Changed: 7/17/2012 4:20:34 PM, Old:     0.00, New:     6.20
+Calc Stop 1 Changed: 7/17/2012 4:20:34 PM, Old:    10.00, New:     7.20
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_25uM.BKNCalc Start 1 Changed: 7/17/2012 4:31:58 PM, Old:     6.20, New:     7.00
+Calc Stop 1 Changed: 7/17/2012 4:31:58 PM, Old:     7.20, New:     8.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_12uM.BKNCalc Start 1 Changed: 7/17/2012 4:45:51 PM, Old:     7.00, New:     6.00
+Calc Stop 1 Changed: 7/17/2012 4:45:51 PM, Old:     8.00, New:     7.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_6uM.BKN
+End Method Modifications
+
+Ca,
+Ca
+Collection Time: 7/17/2012 4:48:57 PM
+Operator Name  :
+Kinetics Software Version: 4.20(468)
+Parameter List :
+Instrument                        Cary 300
+Instrument version                12.00
+Wavelength (nm)                   340.00
+Ordinate mode                     Abs
+SBW (nm)                          1.0
+Ave Time (sec)                    0.100
+Dwell Time(sec)                   0.00
+Cycle Time(min)                   0.00
+Stop Time(min)                    15.00
+Comments
+Method Log     :
+Method Name    :
+Date/Time stamp: 7/17/2012 3:58:18 PM
+Method Modifications:
+Read WL Str Changed: 7/17/2012 3:58:39 PM, Old:500.00, New:340.00
+Read WL1 Changed: 7/17/2012 3:58:39 PM, Old: 500.00, New: 340.00
+Stop Time 1 Changed: 7/17/2012 3:58:39 PM, Old:     1.00, New:    10.00
+Cell Changer Changed: 7/17/2012 3:58:39 PM, Old:OFF, New:ON
+Auto Temp Setting Changed: 7/17/2012 3:58:39 PM, Old:0, New:1
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_50uM.BKNCalc Start 1 Changed: 7/17/2012 4:20:34 PM, Old:     0.00, New:     6.20
+Calc Stop 1 Changed: 7/17/2012 4:20:34 PM, Old:    10.00, New:     7.20
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_25uM.BKNCalc Start 1 Changed: 7/17/2012 4:31:58 PM, Old:     6.20, New:     7.00
+Calc Stop 1 Changed: 7/17/2012 4:31:58 PM, Old:     7.20, New:     8.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_12uM.BKNCalc Start 1 Changed: 7/17/2012 4:45:51 PM, Old:     7.00, New:     6.00
+Calc Stop 1 Changed: 7/17/2012 4:45:51 PM, Old:     8.00, New:     7.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_6uM.BKN
+End Method Modifications
+
+Fe,
+Fe
+Collection Time: 7/17/2012 4:48:57 PM
+Operator Name  :
+Kinetics Software Version: 4.20(468)
+Parameter List :
+Instrument                        Cary 300
+Instrument version                12.00
+Wavelength (nm)                   340.00
+Ordinate mode                     Abs
+SBW (nm)                          1.0
+Ave Time (sec)                    0.100
+Dwell Time(sec)                   0.00
+Cycle Time(min)                   0.00
+Stop Time(min)                    15.00
+Comments
+Method Log     :
+Method Name    :
+Date/Time stamp: 7/17/2012 3:58:18 PM
+Method Modifications:
+Read WL Str Changed: 7/17/2012 3:58:39 PM, Old:500.00, New:340.00
+Read WL1 Changed: 7/17/2012 3:58:39 PM, Old: 500.00, New: 340.00
+Stop Time 1 Changed: 7/17/2012 3:58:39 PM, Old:     1.00, New:    10.00
+Cell Changer Changed: 7/17/2012 3:58:39 PM, Old:OFF, New:ON
+Auto Temp Setting Changed: 7/17/2012 3:58:39 PM, Old:0, New:1
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_50uM.BKNCalc Start 1 Changed: 7/17/2012 4:20:34 PM, Old:     0.00, New:     6.20
+Calc Stop 1 Changed: 7/17/2012 4:20:34 PM, Old:    10.00, New:     7.20
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_25uM.BKNCalc Start 1 Changed: 7/17/2012 4:31:58 PM, Old:     6.20, New:     7.00
+Calc Stop 1 Changed: 7/17/2012 4:31:58 PM, Old:     7.20, New:     8.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_12uM.BKNCalc Start 1 Changed: 7/17/2012 4:45:51 PM, Old:     7.00, New:     6.00
+Calc Stop 1 Changed: 7/17/2012 4:45:51 PM, Old:     8.00, New:     7.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_6uM.BKN
+End Method Modifications
+
+Ca,
+Ca
+Collection Time: 7/17/2012 4:48:57 PM
+Operator Name  :
+Kinetics Software Version: 4.20(468)
+Parameter List :
+Instrument                        Cary 300
+Instrument version                12.00
+Wavelength (nm)                   340.00
+Ordinate mode                     Abs
+SBW (nm)                          1.0
+Ave Time (sec)                    0.100
+Dwell Time(sec)                   0.00
+Cycle Time(min)                   0.00
+Stop Time(min)                    15.00
+Comments
+Method Log     :
+Method Name    :
+Date/Time stamp: 7/17/2012 3:58:18 PM
+Method Modifications:
+Read WL Str Changed: 7/17/2012 3:58:39 PM, Old:500.00, New:340.00
+Read WL1 Changed: 7/17/2012 3:58:39 PM, Old: 500.00, New: 340.00
+Stop Time 1 Changed: 7/17/2012 3:58:39 PM, Old:     1.00, New:    10.00
+Cell Changer Changed: 7/17/2012 3:58:39 PM, Old:OFF, New:ON
+Auto Temp Setting Changed: 7/17/2012 3:58:39 PM, Old:0, New:1
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_50uM.BKNCalc Start 1 Changed: 7/17/2012 4:20:34 PM, Old:     0.00, New:     6.20
+Calc Stop 1 Changed: 7/17/2012 4:20:34 PM, Old:    10.00, New:     7.20
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_25uM.BKNCalc Start 1 Changed: 7/17/2012 4:31:58 PM, Old:     6.20, New:     7.00
+Calc Stop 1 Changed: 7/17/2012 4:31:58 PM, Old:     7.20, New:     8.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_12uM.BKNCalc Start 1 Changed: 7/17/2012 4:45:51 PM, Old:     7.00, New:     6.00
+Calc Stop 1 Changed: 7/17/2012 4:45:51 PM, Old:     8.00, New:     7.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_6uM.BKN
+End Method Modifications
+
+Fe,
+Fe
+Collection Time: 7/17/2012 4:48:57 PM
+Operator Name  :
+Kinetics Software Version: 4.20(468)
+Parameter List :
+Instrument                        Cary 300
+Instrument version                12.00
+Wavelength (nm)                   340.00
+Ordinate mode                     Abs
+SBW (nm)                          1.0
+Ave Time (sec)                    0.100
+Dwell Time(sec)                   0.00
+Cycle Time(min)                   0.00
+Stop Time(min)                    15.00
+Comments
+Method Log     :
+Method Name    :
+Date/Time stamp: 7/17/2012 3:58:18 PM
+Method Modifications:
+Read WL Str Changed: 7/17/2012 3:58:39 PM, Old:500.00, New:340.00
+Read WL1 Changed: 7/17/2012 3:58:39 PM, Old: 500.00, New: 340.00
+Stop Time 1 Changed: 7/17/2012 3:58:39 PM, Old:     1.00, New:    10.00
+Cell Changer Changed: 7/17/2012 3:58:39 PM, Old:OFF, New:ON
+Auto Temp Setting Changed: 7/17/2012 3:58:39 PM, Old:0, New:1
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_50uM.BKNCalc Start 1 Changed: 7/17/2012 4:20:34 PM, Old:     0.00, New:     6.20
+Calc Stop 1 Changed: 7/17/2012 4:20:34 PM, Old:    10.00, New:     7.20
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_25uM.BKNCalc Start 1 Changed: 7/17/2012 4:31:58 PM, Old:     6.20, New:     7.00
+Calc Stop 1 Changed: 7/17/2012 4:31:58 PM, Old:     7.20, New:     8.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_12uM.BKNCalc Start 1 Changed: 7/17/2012 4:45:51 PM, Old:     7.00, New:     6.00
+Calc Stop 1 Changed: 7/17/2012 4:45:51 PM, Old:     8.00, New:     7.00
+Saved as C:\Documents and Settings\labusers\Desktop\Sean's Kinetics Stuff\Metal Ion\Ca_Fe_6uM.BKN
+End Method Modifications
+
