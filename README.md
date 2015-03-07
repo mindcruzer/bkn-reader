@@ -3,9 +3,7 @@
 This is a small application I made back in the day that pulls data out of .bkn files produced by 
 Varian Cary WinUV software, and serializes it to JSON.
 
-Why? I'm not really sure. I was bored I guess.  
-
-It's kind of... ahem... messy, but, it works, so that's something.
+I made this because I'm lazy and I wanted to see if I could generate some kinetics graphs automatically.
 
 #### Prereqs
 
