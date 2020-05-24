@@ -1,8 +1,8 @@
 #ifndef JSON_H
 #define JSON_H
 
-#include "read_bkn.h"
+#include "bkn.h"
 
-char* json_serialize(struct data_set** dataSets, int count);
+char* json_serialize(struct bkn_data*);
 
 #endif

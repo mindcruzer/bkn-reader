@@ -1,5 +1,5 @@
 all:
-	gcc -Wall -c read_bkn.c json.c
-	gcc read_bkn.o json.o -o read_BKN
+	gcc -Wall -c main.c read_bkn.c json.c
+	gcc main.o read_bkn.o json.o -o bkn_reader
 clean:
-	rm -rf read_BKN
+	rm -rf bkn_reader

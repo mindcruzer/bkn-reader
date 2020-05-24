@@ -1,10 +1,6 @@
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "json.h"
 #include "read_bkn.h"
 
 
@@ -16,49 +12,54 @@ struct bkn_file {
 
 
 /**
- * Searches a buffer for the first occurrence of a target sequence of bytes. 
+ * Searches a BKN file for the first occurrence of a target sequence of bytes, starting 
+ * from the current offset. 
  *
- * buffer -- The buffer to search.
- * bufferSize -- The size of `buffer`.
+ * bknFile -- BKN file structure.
  * target -- The sequence of bytes locate in `buffer`.
  * targetSize -- The size of `target`.
- * offset -- An offset to start the search from.
  *
  * Returns:
- * The index immediately following `target` in `buffer` if `target` is found; -1 otherwise.
+ * The index immediately following `target` if `target` is found; -1 otherwise.
  */
-static size_t search_buffer(uint8_t *buffer, size_t bufferSize, uint8_t *target, size_t targetSize, size_t offset) {
-    size_t bufferIndex = 0;
-    size_t targetIndex = 0; 
+static bool search_file(struct bkn_file* bknFile, uint8_t *target, size_t targetSize) {
+    size_t targetIndex = 0;
 
-    for (bufferIndex = offset; bufferIndex < bufferSize; bufferIndex++) {
-        if (buffer[bufferIndex] == target[targetIndex]) { 
-            if (++targetIndex == targetSize)
-                return bufferIndex + 1;
+    while (bknFile->offset < bknFile->size) {
+        if (bknFile->buffer[bknFile->offset] == target[targetIndex]) { 
+            if (++targetIndex == targetSize) {
+                bknFile->offset++;
+                return true;
+            }
         }
         else {
-            if (targetIndex != 0)
-                bufferIndex -= targetIndex;
+            if (targetIndex != 0) {
+                bknFile->offset -= targetIndex;
+            }
+
             targetIndex = 0;
         }
-    }
 
-    return -1;
+        bknFile->offset++;
+    } 
+    
+    bknFile->offset = bknFile->size -1;
+    return false;
 }
 
 
 /**
  * Reads a float from the current offset.
  * 
- * file -- BKN file structure.
+ * bknFile -- BKN file structure.
  * 
  * Returns:
  * Float value.
  */
-static float read_float(struct bkn_file* file) {
+static float read_float(struct bkn_file* bknFile) {
     float value; 
-    memcpy(&value, file->buffer + file->offset, sizeof(float));
-    file->offset += sizeof(float);
+    memcpy(&value, bknFile->buffer + bknFile->offset, sizeof(float));
+    bknFile->offset += sizeof(float);
     return value;
 }
 
@@ -66,45 +67,54 @@ static float read_float(struct bkn_file* file) {
 /*
  * Reads the absorbance/time points from the current offset.
  *
- * file -- BKN file structure.
+ * bknFile -- BKN file structure.
  * numPoints -- Number of points to read.
  * 
  * Returns:
  * Array of points.
  */
-static struct data_point* read_points(struct bkn_file* file, int numPoints) {
-    struct data_point* points = malloc(numPoints * sizeof(struct data_point));
+static struct bkn_point* read_points(struct bkn_file* bknFile, int numPoints) {
+    struct bkn_point* bknPoints = malloc(numPoints * sizeof(struct bkn_point));
+
+    if (bknPoints == NULL) {
+        out_of_memory(); 
+    }
 
     int32_t i;
     for (i = 0; i < numPoints; i++) {
         // A point is a pair of single-precision floating point values
-        points[i].absorbance = read_float(file);
-        points[i].time = read_float(file);
+        bknPoints[i].absorbance = read_float(bknFile);
+        bknPoints[i].time = read_float(bknFile);
     }
 
-    return points;
+    return bknPoints;
 }
 
 
 /*
  * Reads a metadata field from the current offset.
  *
- * file -- BKN file structure.
+ * bknFile -- BKN file structure.
  *
  * Returns:
  * Field value. 
  */
-static char* read_metadata_field(struct bkn_file* file) {
+static char* read_metadata_field(struct bkn_file* bknFile) {
     // The field is preceded by a 32-bit integer indicating the number of 
     // bytes in the field
     int32_t fieldLength;
-    memcpy(&fieldLength, file->buffer + file->offset, 4);
-    file->offset += 4;
+    memcpy(&fieldLength, bknFile->buffer + bknFile->offset, 4);
+    bknFile->offset += 4;
 
     // Read in the field value
     char* value = malloc((fieldLength * sizeof(char)) + 1);
-    memcpy(value, file->buffer + file->offset, fieldLength);
-    file->offset += fieldLength;
+
+    if (value == NULL) {
+        out_of_memory();
+    }
+
+    memcpy(value, bknFile->buffer + bknFile->offset, fieldLength);
+    bknFile->offset += fieldLength;
     value[fieldLength] = '\0';
 
     return value;
@@ -114,63 +124,73 @@ static char* read_metadata_field(struct bkn_file* file) {
 /*
  * Reads method data from the current offset.
  *
- * file -- BKN file structure.
+ * bknFile -- BKN file structure.
  *
  * Returns:
- * Data set.
+ * BKN method.
  */
-static struct data_set* extract_method_data(struct bkn_file* file) {
-    struct data_set* dataSet = malloc(sizeof(struct data_set));
-    memset(dataSet, 0, sizeof(struct data_set));
+static struct bkn_method* extract_method_data(struct bkn_file* bknFile) {
+    struct bkn_method* bknMethod = malloc(sizeof(struct bkn_method));
+
+    if (bknMethod == NULL) {
+        out_of_memory();
+    }
+
+    memset(bknMethod, 0, sizeof(struct bkn_method));
 
     // Seek to the number of points in the method
-    file->offset += 0x1C; 
+    bknFile->offset += 0x1C; 
 
     // The number of points is indicated with a 32-bit integer
-    memcpy(&dataSet->numPoints, file->buffer + file->offset, 4);
+    memcpy(&bknMethod->numPoints, bknFile->buffer + bknFile->offset, 4);
 
     // Seek to the start of the points
-    file->offset += 0x3EC;
-    dataSet->points = read_points(file, dataSet->numPoints);
+    bknFile->offset += 0x3EC;
+    bknMethod->points = read_points(bknFile, bknMethod->numPoints);
 
     // Read in the metadata
     char* value;
     char* endValue = "End Method";
     while(true) {
-        value = read_metadata_field(file);
+        value = read_metadata_field(bknFile);
         
-        dataSet->metadata = realloc(dataSet->metadata, (dataSet->numMetadata + 1) * sizeof(char*));
-        dataSet->metadata[dataSet->numMetadata] = value;
-        dataSet->numMetadata++;
+        bknMethod->metadata = realloc(bknMethod->metadata, (bknMethod->numMetadata + 1) * sizeof(char*));
+
+        if (bknMethod->metadata == NULL) {
+            out_of_memory();
+        }
+
+        bknMethod->metadata[bknMethod->numMetadata] = value;
+        bknMethod->numMetadata++;
 
         if (strncmp(endValue, value, strlen(endValue)) == 0) {
             break;
         }
     }
     
-    return dataSet;
+    return bknMethod;
 } 
 
 
 /* 
  * Reads a batch kinetics file (.bkn) into a file structure.
  *
- * file -- BKN file structure.
- * path -- Path to the file.
+ * bknFile -- BKN file structure.
+ * filePath -- Path to the file.
  * 
  * Returns:
  * true if file is read successfully; false otherwise.
  */
-static bool load_file(struct bkn_file* file, char* path) {
-    // Attempt to open the file
-    FILE* fileHandle = fopen(path, "rb");
+static bool load_file(struct bkn_file* bknFile, char* filePath) {
+    // Open the file
+    FILE* fileHandle = fopen(filePath, "rb");
 
     if (fileHandle == NULL) {
-        fprintf(stderr, "Unable to open '%s'.\n", path);
+        fprintf(stderr, "Unable to open '%s'.\n", filePath);
         return false;
     }
 
-    // Get the file size
+    // Get the file size in bytes
     fseek(fileHandle, 0, SEEK_END);
     long fileSize = ftell(fileHandle);
     rewind(fileHandle);
@@ -179,8 +199,7 @@ static bool load_file(struct bkn_file* file, char* path) {
     uint8_t* buffer = malloc(fileSize * sizeof(uint8_t));
 
     if(buffer == NULL) {
-        fprintf(stderr, "Not enough memory to read the file.\n");
-        return false;
+        out_of_memory();
     }
 
     // Read the file into memory
@@ -188,63 +207,53 @@ static bool load_file(struct bkn_file* file, char* path) {
     fclose(fileHandle);
 
     if (bytesRead != fileSize) {
-        fprintf(stderr, "Error reading %s.\n", path);
+        fprintf(stderr, "Error reading %s.\n", filePath);
         free(buffer);
         return false;
     }
     
-    file->buffer = buffer;
-    file->size = fileSize;
-    file->offset = 0;
+    bknFile->buffer = buffer;
+    bknFile->size = (size_t)fileSize;
+    bknFile->offset = 0;
 
     return true;
 }
 
 
-/*
- * Application entry point.
- *
- * Args:
- * [1] -- Path to the BKN file.
- */
-int main(int argc, char **argv) {
-    if (argc != 2) {
-        printf("Specify a single BKN file.\n");
-        return EXIT_FAILURE;
-    }
+/**
+ * Reads method data from a BKN file.
+ * 
+ * filePath -- Path to .BKN file.
+ * 
+ * Returns: 
+ * true if read was successful; false otherwise.
+ */ 
+bool read_bkn(char* filePath, struct bkn_data* bknData) {
+    // Load the file into memory
+    struct bkn_file bknFile; 
+    memset(&bknFile, 0, sizeof(struct bkn_file));
     
-    // Read the file 
-    struct bkn_file file; 
-    if (!load_file(&file, argv[1])) {
-        return EXIT_FAILURE;
+    if (!load_file(&bknFile, filePath)) {
+        return false;
     }
 
-    // Find each method 
+    // Scan the file from top to bottom for method data 
     char* methodStartValue = "TContinuumStore";
-    struct data_set** dataSets = NULL;
-    int numDataSets = 0;
     while (1) {
-        file.offset = search_buffer(file.buffer, file.size, (uint8_t*)methodStartValue, strlen(methodStartValue), file.offset);
-
-        if (file.offset == -1) {
-            // End of methods
-            break;
+        if (!search_file(&bknFile, (uint8_t*)methodStartValue, strlen(methodStartValue))) {
+            // No more method data in file
+            break;   
         }
         
-        dataSets = realloc(dataSets, (numDataSets + 1) * sizeof(struct data_set*));
+        bknData->methods = realloc(bknData->methods, (bknData->numMethods + 1) * sizeof(struct bkn_method*));
 
-        if (dataSets == NULL) {
-            printf("Memory allocation failed :(\n.");
-            return EXIT_FAILURE;
+        if (bknData->methods == NULL) {
+            out_of_memory();
         }
         
-        dataSets[numDataSets] = extract_method_data(&file);
-        numDataSets++;
+        bknData->methods[bknData->numMethods] = extract_method_data(&bknFile);
+        bknData->numMethods++;
     }
 
-    // Output as JSON string
-    char* json = json_serialize(dataSets, numDataSets);
-    printf("%s\n", json);
-    
-    return EXIT_SUCCESS;
+    return true;
 }
