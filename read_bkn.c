@@ -80,7 +80,7 @@ static struct bkn_point* read_bkn_points(struct bkn_file* bknFile, int numPoints
         out_of_memory(); 
     }
 
-    int32_t i;
+    uint32_t i;
     for (i = 0; i < numPoints; i++) {
         // A point is a pair of single-precision floating point values
         bknPoints[i].absorbance = read_float(bknFile);
@@ -102,7 +102,7 @@ static struct bkn_point* read_bkn_points(struct bkn_file* bknFile, int numPoints
 static char* read_bkn_field(struct bkn_file* bknFile) {
     // The field is preceded by a 32-bit integer indicating the number of 
     // bytes in the field
-    int32_t fieldLength;
+    uint32_t fieldLength;
     memcpy(&fieldLength, bknFile->buffer + bknFile->offset, 4);
     bknFile->offset += 4;
 
