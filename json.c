@@ -225,23 +225,23 @@ static char* sb_finish(SB *sb)
 
 
 /*
- * JSON serializes a collection of dSets.
+ * JSON serializes a collection of data sets.
  *
- * sets -- A collection of dSet objects.
- * count -- The number of dSets in sets.
+ * dataSets -- Data sets.
+ * numDataSets -- Number of data sets.
  *
  */
-char* json_serialize(struct data_set** dataSets, int count) 
+char* json_serialize(struct data_set** dataSets, int numDataSets) 
 {
     SB sb;
     sb_init(&sb);
     sb_putc(&sb, '[');
 
     int i;
-    for (i = 0; i < count; i++) {
+    for (i = 0; i < numDataSets; i++) {
         sb_put_data_set(&sb, dataSets[i]);
         
-        if (i != count - 1) {
+        if (i != numDataSets - 1) {
             sb_putc(&sb, ',');
         }
     }
