@@ -4,9 +4,6 @@
  * 
  * This program reads the absorbance/time data out of .BKN files produced
  * by Varian Cary WinUV software. 
- * 
- * Use:
- * ./read_bkn [file path]
  */
 #include <stdbool.h>
 #include <stdint.h>

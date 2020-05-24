@@ -145,6 +145,20 @@ static void sb_putf(SB *sb, float num)
 
 
 /*
+ * Finishes a string buffer by adding on the null character.
+ *
+ * sb -- A previously initialized string buffer to finish. 
+ *
+ */
+static char* sb_finish(SB *sb) 
+{
+    *(sb->cur) = 0;
+    assert(sb->start <= sb->cur && strlen(sb->start) == (size_t)(sb->cur - sb->start));
+    return sb->start;
+}
+
+
+/*
  * Stringifies a dSet and appends it to a string buffer.
  *
  * sb -- A previously initialized string buffer.
@@ -154,8 +168,6 @@ static void sb_putf(SB *sb, float num)
 static void sb_put_data_set(SB* sb, struct data_set* dataSet) 
 {
     sb_putc(sb, '{');
-
-    // Data points
     sb_putc(sb, '\"');
     sb_puts(sb, "points");
     sb_putc(sb, '\"');
@@ -185,13 +197,10 @@ static void sb_put_data_set(SB* sb, struct data_set* dataSet)
     
     sb_putc(sb, ']');
     sb_putc(sb, ',');
-
     sb_putc(sb, '\"');
     sb_puts(sb, "metadata");
     sb_putc(sb, '\"');
-    
     sb_putc(sb, ':');
-    
     sb_putc(sb, '[');
     
     for (i = 0; i < dataSet->numMetadata; i++) {
@@ -205,22 +214,7 @@ static void sb_put_data_set(SB* sb, struct data_set* dataSet)
     }
     
     sb_putc(sb, ']');
-        
     sb_putc(sb, '}');
-}
-
-
-/*
- * Finishes a string buffer by adding on the null character.
- *
- * sb -- A previously initialized string buffer to finish. 
- *
- */
-static char* sb_finish(SB *sb) 
-{
-    *(sb->cur) = 0;
-    assert(sb->start <= sb->cur && strlen(sb->start) == (size_t)(sb->cur - sb->start));
-    return sb->start;
 }
 
 
