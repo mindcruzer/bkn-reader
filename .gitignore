@@ -3,4 +3,4 @@
 *.swp
 *.o
 
-read_BKN
+bkn_reader

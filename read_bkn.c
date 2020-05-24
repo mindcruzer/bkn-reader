@@ -22,7 +22,7 @@ struct bkn_file {
  * Returns:
  * The index immediately following `target` if `target` is found; -1 otherwise.
  */
-static bool search_file(struct bkn_file* bknFile, uint8_t *target, size_t targetSize) {
+static bool search_bkn_file(struct bkn_file* bknFile, uint8_t *target, size_t targetSize) {
     size_t targetIndex = 0;
 
     while (bknFile->offset < bknFile->size) {
@@ -73,7 +73,7 @@ static float read_float(struct bkn_file* bknFile) {
  * Returns:
  * Array of points.
  */
-static struct bkn_point* read_points(struct bkn_file* bknFile, int numPoints) {
+static struct bkn_point* read_bkn_points(struct bkn_file* bknFile, int numPoints) {
     struct bkn_point* bknPoints = malloc(numPoints * sizeof(struct bkn_point));
 
     if (bknPoints == NULL) {
@@ -99,7 +99,7 @@ static struct bkn_point* read_points(struct bkn_file* bknFile, int numPoints) {
  * Returns:
  * Field value. 
  */
-static char* read_metadata_field(struct bkn_file* bknFile) {
+static char* read_bkn_field(struct bkn_file* bknFile) {
     // The field is preceded by a 32-bit integer indicating the number of 
     // bytes in the field
     int32_t fieldLength;
@@ -129,7 +129,7 @@ static char* read_metadata_field(struct bkn_file* bknFile) {
  * Returns:
  * BKN method.
  */
-static struct bkn_method* extract_method_data(struct bkn_file* bknFile) {
+static struct bkn_method* read_bkn_method(struct bkn_file* bknFile) {
     struct bkn_method* bknMethod = malloc(sizeof(struct bkn_method));
 
     if (bknMethod == NULL) {
@@ -146,13 +146,13 @@ static struct bkn_method* extract_method_data(struct bkn_file* bknFile) {
 
     // Seek to the start of the points
     bknFile->offset += 0x3EC;
-    bknMethod->points = read_points(bknFile, bknMethod->numPoints);
+    bknMethod->points = read_bkn_points(bknFile, bknMethod->numPoints);
 
     // Read in the metadata
     char* value;
     char* endValue = "End Method";
     while(true) {
-        value = read_metadata_field(bknFile);
+        value = read_bkn_field(bknFile);
         
         bknMethod->metadata = realloc(bknMethod->metadata, (bknMethod->numMetadata + 1) * sizeof(char*));
 
@@ -181,7 +181,7 @@ static struct bkn_method* extract_method_data(struct bkn_file* bknFile) {
  * Returns:
  * true if file is read successfully; false otherwise.
  */
-static bool load_file(struct bkn_file* bknFile, char* filePath) {
+static bool load_bkn_file(struct bkn_file* bknFile, char* filePath) {
     // Open the file
     FILE* fileHandle = fopen(filePath, "rb");
 
@@ -233,14 +233,14 @@ bool read_bkn(char* filePath, struct bkn_data* bknData) {
     struct bkn_file bknFile; 
     memset(&bknFile, 0, sizeof(struct bkn_file));
     
-    if (!load_file(&bknFile, filePath)) {
+    if (!load_bkn_file(&bknFile, filePath)) {
         return false;
     }
 
     // Scan the file from top to bottom for method data 
     char* methodStartValue = "TContinuumStore";
     while (1) {
-        if (!search_file(&bknFile, (uint8_t*)methodStartValue, strlen(methodStartValue))) {
+        if (!search_bkn_file(&bknFile, (uint8_t*)methodStartValue, strlen(methodStartValue))) {
             // No more method data in file
             break;   
         }
@@ -251,7 +251,7 @@ bool read_bkn(char* filePath, struct bkn_data* bknData) {
             out_of_memory();
         }
         
-        bknData->methods[bknData->numMethods] = extract_method_data(&bknFile);
+        bknData->methods[bknData->numMethods] = read_bkn_method(&bknFile);
         bknData->numMethods++;
     }
 
