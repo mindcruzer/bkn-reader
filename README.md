@@ -1,4 +1,4 @@
-### Batch Kinetics File Reader
+### Cary WinUV File Reader
 
 This application will read the data out of .BKN files produced by Varian Cary WinUV software. 
 
