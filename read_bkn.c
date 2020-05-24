@@ -1,10 +1,3 @@
-/* 
- * Copyright (C) 2012 Sean D. Stewart
- * All rights reserved. 
- * 
- * This program reads the absorbance/time data out of .BKN files produced
- * by Varian Cary WinUV software. 
- */
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -213,7 +206,6 @@ static bool load_file(struct bkn_file* file, char* path) {
  *
  * Args:
  * [1] -- Path to the BKN file.
- *
  */
 int main(int argc, char **argv) {
     if (argc != 2) {
