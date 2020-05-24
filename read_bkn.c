@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2012 Sean D. Stewart (sdstewar@gmail.com)
+ * Copyright (C) 2012 Sean D. Stewart
  * All rights reserved. 
  * 
  * This program reads the absorbance/time data out of .BKN files produced
