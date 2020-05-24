@@ -3,13 +3,12 @@
 This application will read the data out of .BKN files produced by Varian Cary WinUV software. 
 
 ### Dependencies
-All you should need is a C compiler.
+Any C compiler.
 
 #### Building
-Run `make` from the root folder.
+`cd` to the root folder and run `make`.
 
 #### Running
-Ex.
 ```
-./read_BKN test_data/test.bkn > test.json
+./read_BKN sample-data/test.bkn > test.json
 ```
