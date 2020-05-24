@@ -112,12 +112,12 @@ static char* read_metadata_field(struct bkn_file* file) {
     file->offset += 4;
 
     // Read in the field value
-    char* fieldContents = malloc((fieldLength * sizeof(char)) + 1);
-    memcpy(fieldContents, file->buffer + file->offset, fieldLength);
+    char* value = malloc((fieldLength * sizeof(char)) + 1);
+    memcpy(value, file->buffer + file->offset, fieldLength);
     file->offset += fieldLength;
-    fieldContents[fieldLength] = '\0';
+    value[fieldLength] = '\0';
 
-    return fieldContents;
+    return value;
 }
 
 
