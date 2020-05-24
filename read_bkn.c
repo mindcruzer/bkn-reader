@@ -166,14 +166,17 @@ static struct data_set* extract_method_data(struct bkn_file* file) {
  *
  * file -- BKN file structure.
  * path -- Path to the file.
+ * 
+ * Returns:
+ * true if file is read successfully; false otherwise.
  */
-static void load_file(struct bkn_file* file, char* path) {
+static bool load_file(struct bkn_file* file, char* path) {
     // Attempt to open the file
     FILE* fileHandle = fopen(path, "rb");
 
     if (fileHandle == NULL) {
         fprintf(stderr, "Unable to open '%s'.\n", path);
-        exit(EXIT_FAILURE);
+        return false;
     }
 
     // Get the file size
@@ -186,7 +189,7 @@ static void load_file(struct bkn_file* file, char* path) {
 
     if(buffer == NULL) {
         fprintf(stderr, "Not enough memory to read the file.\n");
-        exit(EXIT_FAILURE);
+        return false;
     }
 
     // Read the file into memory
@@ -196,12 +199,14 @@ static void load_file(struct bkn_file* file, char* path) {
     if (bytesRead != fileSize) {
         fprintf(stderr, "Error reading %s.\n", path);
         free(buffer);
-        exit(EXIT_FAILURE);
+        return false;
     }
     
     file->buffer = buffer;
     file->size = fileSize;
     file->offset = 0;
+
+    return true;
 }
 
 
@@ -214,13 +219,15 @@ static void load_file(struct bkn_file* file, char* path) {
  */
 int main(int argc, char **argv) {
     if (argc != 2) {
-        fprintf(stdout, "Specify a single BKN file.\n");
-        return EXIT_SUCCESS;
+        printf("Specify a single BKN file.\n");
+        return EXIT_FAILURE;
     }
     
     // Read the file 
     struct bkn_file file; 
-    load_file(&file, argv[1]);
+    if (!load_file(&file, argv[1])) {
+        return EXIT_FAILURE;
+    }
 
     // Find each method 
     char* methodStartValue = "TContinuumStore";
@@ -238,7 +245,7 @@ int main(int argc, char **argv) {
 
         if (dataSets == NULL) {
             printf("Memory allocation failed :(\n.");
-            exit(EXIT_FAILURE);
+            return EXIT_FAILURE;
         }
         
         dataSets[numDataSets] = extract_method_data(&file);
