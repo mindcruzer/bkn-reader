@@ -1,6 +1,8 @@
-/* Copyright (C) 2012 Sean D. Stewart (sdstewar@gmail.com)
- * All rights reserved. 
- */
+#ifndef JSON_H
+#define JSON_H
 
+#include "read_bkn.h"
 
-char* json_serialize(dSet** sets, int count);
+char* json_serialize(struct data_set** dataSets, int count);
+
+#endif

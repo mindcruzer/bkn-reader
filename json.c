@@ -1,18 +1,8 @@
-/* Copyright (C) 2012 Sean D. Stewart (sdstewar@gmail.com)
- * All rights reserved. 
- * 
- * Provides json_serialize, which converts a collection of dSets 
- * to a JSON string representation. 
- *
- */
-
-
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "read_bkn.h"
 #include "json.h"
 
 #define SB_INIT_SIZE 17
@@ -155,226 +145,66 @@ static void sb_putf(SB *sb, float num)
 
 
 /*
- * Stringifies a dField with the name and value, then appends it to a string buffer.
- *
- * sb -- A previously initialized string buffer.
- * field -- The dField to append to sb.
- *
- */
-static void sb_put_nv_field(SB *sb, dField* field)
-{
-    sb_putc(sb, '\"');
-    sb_puts(sb, field->name);         // 'field name'
-    sb_putc(sb, '\"');
-
-    sb_putc(sb, ':');                 // :
-    
-    sb_putc(sb, '\"');
-    sb_puts(sb, field->value);        // 'field value'
-    sb_putc(sb, '\"');
-}
-
-
-/*
- * Stringifies a dField with the name, value, and units, then appends it to a string buffer.
- *
- * sb -- A previously initialized string buffer.
- * field -- The dField to append to sb.
- *
- */
-static void sb_put_nvu_field(SB *sb, dField* field)
-{
-    sb_putc(sb, '\"');
-    sb_puts(sb, field->name);         // 'field name'
-    sb_putc(sb, '\"');
-
-    sb_putc(sb, ':');                 // :
-    
-    sb_putc(sb, '{');                 //     {   
-
-    sb_putc(sb, '\"');
-    sb_puts(sb, "value");             //       'value'
-    sb_putc(sb, '\"');
-    
-    sb_putc(sb, ':');                 //       :  
-
-    sb_putc(sb, '\"');
-    sb_puts(sb, field->value);        //       'field value'
-    sb_putc(sb, '\"');
-    
-    sb_putc(sb, ',');                 //       ,
-
-    sb_putc(sb, '\"');
-    sb_puts(sb, "units");             //       'units'
-    sb_putc(sb, '\"');
-    
-    sb_putc(sb, ':');                 //       :
-
-    sb_putc(sb, '\"');
-    sb_puts(sb, field->units);        //       'field units'
-    sb_putc(sb, '\"');
-    
-    sb_putc(sb, '}');                 //    }
-}
-
-
-/*
- * Stringifies a dField with the name, value, and units, then appends it to a string buffer.
- *
- * sb -- A previously initialized string buffer.
- * field -- The dField to append to sb.
- *
- */
-static void sb_put_meta_field(SB *sb, dField* field)
-{
-    
-    sb_putc(sb, '{');                 //     {   
-
-    sb_putc(sb, '\"');
-    sb_puts(sb, "name");             //       'name'
-    sb_putc(sb, '\"');
-    
-    sb_putc(sb, ':');                 //       :  
-
-    sb_putc(sb, '\"');
-    sb_puts(sb, field->name);        //       'field name'
-    sb_putc(sb, '\"');
-    
-    sb_putc(sb, ',');                 //       ,
-    
-    sb_putc(sb, '\"');
-    sb_puts(sb, "value");             //       'value'
-    sb_putc(sb, '\"');
-    
-    sb_putc(sb, ':');                 //       :  
-
-    sb_putc(sb, '\"');
-    sb_puts(sb, field->value);        //       'field value'
-    sb_putc(sb, '\"');
-    
-    sb_putc(sb, ',');                 //       ,
-
-    sb_putc(sb, '\"');
-    sb_puts(sb, "units");             //       'units'
-    sb_putc(sb, '\"');
-    
-    sb_putc(sb, ':');                 //       :
-
-    sb_putc(sb, '\"');
-    sb_puts(sb, field->units);        //       'field units'
-    sb_putc(sb, '\"');
-    
-    sb_putc(sb, '}');                 //    }
-}
-
-
-/*
- * Stringifies a dPoint and appends it to a string buffer.
- *
- * sb -- A previously initialized string buffer.
- * point -- The dPoint to append to sb.
- *
- */
-static void sb_put_point(SB *sb, dPoint* point)
-{
-    sb_putc(sb, '[');                 //     [   
-
-    sb_putf(sb, point->abs);          //       abs value
-    
-    sb_putc(sb, ',');                 //       ,
-    
-    sb_putf(sb, point->time);         //       time value
-
-    sb_putc(sb, ']');                 //    ]
-}
-
-
-/*
  * Stringifies a dSet and appends it to a string buffer.
  *
  * sb -- A previously initialized string buffer.
  * set -- A pointer to a dSet to add to sb.
  *
  */
-static void sb_put_dset(SB* sb, dSet* set) 
+static void sb_put_data_set(SB* sb, struct data_set* dataSet) 
 {
     sb_putc(sb, '{');
-    
-        // standard fields
-        sb_put_nv_field(sb, &set->name);
-        sb_putc(sb, ',');
-            
-        sb_put_nv_field(sb, &set->collection_time);
-        sb_putc(sb, ',');
-    
-        sb_put_nvu_field(sb, &set->wavelength);
-        sb_putc(sb, ',');
-        
-        // data points
-        sb_putc(sb, '\"');
-        sb_puts(sb, "points");
-        sb_putc(sb, '\"');
-        
-        sb_putc(sb, ':');
-        
-        sb_putc(sb, '[');
-        
-            int i;
-            for (i = 0; i < set->num_points; i++) {
-                sb_put_point(sb, set->points[i]);
 
-                if (i != set->num_points - 1) {
-                    sb_putc(sb, ',');
-                }
-            }
-        
-        sb_putc(sb, ']');
-        sb_putc(sb, ',');
+    // Data points
+    sb_putc(sb, '\"');
+    sb_puts(sb, "points");
+    sb_putc(sb, '\"');
+    sb_putc(sb, ':');
+    sb_putc(sb, '[');
 
-        // metadata fields
-        // TODO: this should really be a list, since we're just going to iterate over 
-        // the meta fields when we display them
+    int i;
+    for (i = 0; i < dataSet->numPoints; i++) {
+        sb_putc(sb, '{');
         sb_putc(sb, '\"');
-        sb_puts(sb, "meta");
+        sb_puts(sb, "time");
         sb_putc(sb, '\"');
-        
         sb_putc(sb, ':');
+        sb_putf(sb, dataSet->points[i].absorbance);
+        sb_putc(sb, ',');             
+        sb_putc(sb, '\"');
+        sb_puts(sb, "absorbance");
+        sb_putc(sb, '\"');
+        sb_putc(sb, ':');
+        sb_putf(sb, dataSet->points[i].time); 
+        sb_putc(sb, '}');
+
+        if (i != dataSet->numPoints - 1) {
+            sb_putc(sb, ',');
+        }
+    }
+    
+    sb_putc(sb, ']');
+    sb_putc(sb, ',');
+
+    sb_putc(sb, '\"');
+    sb_puts(sb, "metadata");
+    sb_putc(sb, '\"');
+    
+    sb_putc(sb, ':');
+    
+    sb_putc(sb, '[');
+    
+    for (i = 0; i < dataSet->numMetadata; i++) {
+        sb_putc(sb, '\"');
+        sb_puts(sb, dataSet->metadata[i]); 
+        sb_putc(sb, '\"');
         
-        sb_putc(sb, '[');
-        
-        sb_put_meta_field(sb, &set->operator_name);
-        sb_putc(sb, ',');
-        
-        sb_put_meta_field(sb, &set->kinetics_version);
-        sb_putc(sb, ',');
-        
-        sb_put_meta_field(sb, &set->param_list);
-        sb_putc(sb, ',');
-        
-        sb_put_meta_field(sb, &set->instrument);
-        sb_putc(sb, ',');
-        
-        sb_put_meta_field(sb, &set->instrument_version);
-        sb_putc(sb, ',');
-        
-        sb_put_meta_field(sb, &set->ordinate_mode);
-        sb_putc(sb, ',');
-        
-        sb_put_meta_field(sb, &set->sbw);
-        sb_putc(sb, ',');
-        
-        sb_put_meta_field(sb, &set->ave_time);
-        sb_putc(sb, ',');
-        
-        sb_put_meta_field(sb, &set->dwell_time);
-        sb_putc(sb, ',');
-        
-        sb_put_meta_field(sb, &set->cycle_time);
-        sb_putc(sb, ',');
-        
-        sb_put_meta_field(sb, &set->stop_time);
-        
-        sb_putc(sb, ']');
+        if (i != dataSet->numMetadata - 1) {
+            sb_putc(sb, ',');
+        }
+    }
+    
+    sb_putc(sb, ']');
         
     sb_putc(sb, '}');
 }
@@ -401,17 +231,15 @@ static char* sb_finish(SB *sb)
  * count -- The number of dSets in sets.
  *
  */
-char* json_serialize(dSet** sets, int count)
+char* json_serialize(struct data_set** dataSets, int count) 
 {
     SB sb;
-
     sb_init(&sb);
-
     sb_putc(&sb, '[');
 
     int i;
     for (i = 0; i < count; i++) {
-        sb_put_dset(&sb, sets[i]);
+        sb_put_data_set(&sb, dataSets[i]);
         
         if (i != count - 1) {
             sb_putc(&sb, ',');
@@ -419,7 +247,6 @@ char* json_serialize(dSet** sets, int count)
     }
     
     sb_putc(&sb, ']');
-    
     sb_finish(&sb);
 
     return sb.start;
