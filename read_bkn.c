@@ -141,9 +141,10 @@ static struct data_set* extract_method_data(struct bkn_file* file) {
     dataSet->points = read_points(file, dataSet->numPoints);
 
     // Read in the metadata
+    char* value;
     char* endValue = "End Method";
     while(true) {
-        char* value = read_metadata_field(file);
+        value = read_metadata_field(file);
         
         dataSet->metadata = realloc(dataSet->metadata, (dataSet->numMetadata + 1) * sizeof(char*));
         dataSet->metadata[dataSet->numMetadata] = value;
