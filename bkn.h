@@ -21,7 +21,7 @@ struct bkn_method {
 };
 
 struct bkn_data {
-    struct bkn_method** methods;
+    struct bkn_method* methods;
     uint32_t numMethods;
 };
 

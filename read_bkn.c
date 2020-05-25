@@ -125,19 +125,12 @@ static char* read_bkn_field(struct bkn_file* bknFile) {
  * Reads method data from the current offset.
  *
  * bknFile -- BKN file structure.
+ * bknMethod -- Structure method data will be written into.
  *
  * Returns:
  * BKN method.
  */
-static struct bkn_method* read_bkn_method(struct bkn_file* bknFile) {
-    struct bkn_method* bknMethod = malloc(sizeof(struct bkn_method));
-
-    if (bknMethod == NULL) {
-        out_of_memory();
-    }
-
-    memset(bknMethod, 0, sizeof(struct bkn_method));
-
+static struct bkn_method* read_bkn_method(struct bkn_file* bknFile, struct bkn_method* bknMethod) {
     // Seek to the number of points in the method
     bknFile->offset += 0x1C; 
 
@@ -245,13 +238,13 @@ bool read_bkn(char* filePath, struct bkn_data* bknData) {
             break;   
         }
         
-        bknData->methods = realloc(bknData->methods, (bknData->numMethods + 1) * sizeof(struct bkn_method*));
+        bknData->methods = realloc(bknData->methods, (bknData->numMethods + 1) * sizeof(struct bkn_method));
 
         if (bknData->methods == NULL) {
             out_of_memory();
         }
         
-        bknData->methods[bknData->numMethods] = read_bkn_method(&bknFile);
+        read_bkn_method(&bknFile, &bknData->methods[bknData->numMethods]);
         bknData->numMethods++;
     }
 

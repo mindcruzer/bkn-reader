@@ -33,12 +33,12 @@ int main(int argc, char **argv) {
     uint32_t i, j;
     for (i = 0; i < bknData->numMethods; i++) {
         printf("[points]\n");
-        for (j = 0; j < bknData->methods[i]->numPoints; j++) {
-            printf("%.10f,%.10f\n", bknData->methods[i]->points[j].time, bknData->methods[i]->points[j].absorbance);
+        for (j = 0; j < bknData->methods[i].numPoints; j++) {
+            printf("%.10f,%.10f\n", bknData->methods[i].points[j].time, bknData->methods[i].points[j].absorbance);
         } 
         printf("[metadata]\n");
-        for (j = 0; j < bknData->methods[i]->numMetadata; j++) {
-            printf("%s\n", bknData->methods[i]->metadata[j]);
+        for (j = 0; j < bknData->methods[i].numMetadata; j++) {
+            printf("%s\n", bknData->methods[i].metadata[j]);
         } 
     }
 
