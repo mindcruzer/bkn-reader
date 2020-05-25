@@ -1,7 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "json.h"
 #include "read_bkn.h"
 
 
@@ -30,9 +29,18 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }    
 
-    // Output as JSON string
-    char* json = json_serialize(bknData);
-    printf("%s\n", json);
-    
+    // Write data to stdout
+    uint32_t i, j;
+    for (i = 0; i < bknData->numMethods; i++) {
+        printf("[points]\n");
+        for (j = 0; j < bknData->methods[i]->numPoints; j++) {
+            printf("%.10f,%.10f\n", bknData->methods[i]->points[j].time, bknData->methods[i]->points[j].absorbance);
+        } 
+        printf("[metadata]\n");
+        for (j = 0; j < bknData->methods[i]->numMetadata; j++) {
+            printf("%s\n", bknData->methods[i]->metadata[j]);
+        } 
+    }
+
     return EXIT_SUCCESS;
 }

@@ -2,5 +2,6 @@
 *~
 *.swp
 *.o
+*.txt
 
 bkn_reader

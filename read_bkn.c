@@ -148,7 +148,7 @@ static struct bkn_method* read_bkn_method(struct bkn_file* bknFile) {
     bknFile->offset += 0x3EC;
     bknMethod->points = read_bkn_points(bknFile, bknMethod->numPoints);
 
-    // Read in the metadata
+    // The metadata immediately follows the points
     char* value;
     char* endValue = "End Method";
     while(true) {
